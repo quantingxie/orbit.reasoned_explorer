@@ -11,15 +11,15 @@ from omni.isaac.orbit.assets import AssetBaseCfg
 from omni.isaac.orbit.scene import InteractiveSceneCfg
 from omni.isaac.orbit.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
 from omni.isaac.orbit.utils import configclass
-from omni.viplanner.utils import UnRealImporterCfg
+from orbit.reasoned_explorer.utils import UnRealImporterCfg
 
 ##
 # Pre-defined configs
 ##
 # isort: off
 from omni.isaac.orbit_assets.anymal import ANYMAL_C_CFG
-from .base_cfg import ViPlannerBaseCfg
-from ..viplanner import DATA_DIR
+from .base_cfg import ReasonedExplorerBaseCfg
+from ..reasoned_explorer import DATA_DIR
 
 ##
 # Scene definition
@@ -47,22 +47,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         vehicle_config_file=os.path.join(DATA_DIR, "town01", "vehicle_cfg.yml"),
         axis_up="Z",
     )
-
-    # robots
-    robot = ANYMAL_C_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
-    robot.init_state.pos = (8.0, -0.5, 0.6)
-    robot.init_state.rot = (0.5253, 0.0, 0.0, 0.8509)
-
-    # sensors
-    height_scanner = RayCasterCfg(
-        prim_path="{ENV_REGEX_NS}/Robot/base",
-        offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 0.5)),
-        attach_yaw_only=True,
-        pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
-        debug_vis=True,
-        mesh_prim_paths=["/World/GroundPlane"],
-    )
-    contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, debug_vis=False)
+    
     # lights
     light = AssetBaseCfg(
         prim_path="/World/light",
@@ -71,24 +56,53 @@ class TerrainSceneCfg(InteractiveSceneCfg):
             intensity=1000.0,
         ),
     )
+
+    # robots
+    robot = ANYMAL_C_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
+    robot.init_state.pos = (8.0, -0.5, 0.6)
+    robot.init_state.rot = (0.5253, 0.0, 0.0, 0.8509)
+
+
     # camera
-    depth_camera = CameraCfg(
-        prim_path="{ENV_REGEX_NS}/Robot/base/depth_camera",
-        offset=CameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)),
+    front_depth_camera = CameraCfg(
+        prim_path="{ENV_REGEX_NS}/Robot/base/depth_camera_front",
+        offset=CameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(0.5, -0.5, 0.5, -0.5)),
         spawn=sim_utils.PinholeCameraCfg(),
         width=848,
         height=480,
-        data_types=["distance_to_image_plane"],
+        data_types=["distance_to_image_plane", "rgb"],
+        spawn=sim_utils.PinholeCameraCfg(
+            focal_length=24.0,
+            focus_distance=400.0,
+            horizontal_aperture=20.955,
+        ),
     )
-    semantic_camera = CameraCfg(
-        prim_path="{ENV_REGEX_NS}/Robot/base/semantic_camera",
-        offset=CameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)),
+    left_depth_camera = CameraCfg(
+        prim_path="{ENV_REGEX_NS}/Robot/base/depth_camera_left",
+        offset=CameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(0.18301270189221938, -0.6830127018922193, 0.6830127018922193, -0.18301270189221938)),
         spawn=sim_utils.PinholeCameraCfg(),
-        width=1280,
-        height=720,
-        data_types=["semantic_segmentation"],
+        width=848,
+        height=480,
+        data_types=["distance_to_image_plane", "rgb"],
+        spawn=sim_utils.PinholeCameraCfg(
+            focal_length=24.0,
+            focus_distance=400.0,
+            horizontal_aperture=20.955,
+        ),
     )
-
+    right_depth_camera = CameraCfg(
+        prim_path="{ENV_REGEX_NS}/Robot/base/depth_camera_right",
+        offset=CameraCfg.OffsetCfg(pos=(0.510, 0.0, 0.015), rot=(0.6830127018922193, -0.18301270189221938, 0.18301270189221938, -0.6830127018922193)),
+        spawn=sim_utils.PinholeCameraCfg(),
+        width=848,
+        height=480,
+        data_types=["distance_to_image_plane", "rgb"],
+        spawn=sim_utils.PinholeCameraCfg(
+            focal_length=24.0,
+            focus_distance=400.0,
+            horizontal_aperture=20.955,
+        ),
+    )
 
 ##
 # Environment configuration
@@ -96,7 +110,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
 
 
 @configclass
-class ViPlannerCarlaCfg(ViPlannerBaseCfg):
+class ReasonedExplorerCarlaCfg(ReasonedExplorerBaseCfg):
     """Configuration for the locomotion velocity-tracking environment."""
 
     # Scene settings

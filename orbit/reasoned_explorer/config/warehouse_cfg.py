@@ -11,10 +11,10 @@ from omni.isaac.orbit.assets import AssetBaseCfg
 from omni.isaac.orbit.scene import InteractiveSceneCfg
 from omni.isaac.orbit.sensors import CameraCfg, ContactSensorCfg, RayCasterCfg, patterns
 from omni.isaac.orbit.utils import configclass
-from omni.viplanner.utils import UnRealImporterCfg
+from orbit.reasoned_explorer.utils import UnRealImporterCfg
 
-from ..viplanner import DATA_DIR
-from .base_cfg import ViPlannerBaseCfg
+from ..reasoned_explorer import DATA_DIR
+from .base_cfg import ReasonedExplorerBaseCfg
 
 ##
 # Pre-defined configs
@@ -96,7 +96,7 @@ class TerrainSceneCfg(InteractiveSceneCfg):
 
 
 @configclass
-class ViPlannerWarehouseCfg(ViPlannerBaseCfg):
+class ReasonedExplorerWarehouseCfg(ReasonedExplorerBaseCfg):
     """Configuration for the locomotion velocity-tracking environment."""
 
     # Scene settings

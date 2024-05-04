@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 import omni.isaac.orbit.sim as sim_utils
-import omni.viplanner.viplanner.mdp as mdp
+import orbit.reasoned_explorer.reasoned_explorer.mdp as mdp
 from omni.isaac.matterport.config import MatterportImporterCfg
 from omni.isaac.matterport.domains import MatterportRayCasterCfg
 from omni.isaac.orbit.assets import AssetBaseCfg
@@ -15,9 +15,9 @@ from omni.isaac.orbit.managers import SceneEntityCfg
 from omni.isaac.orbit.scene import InteractiveSceneCfg
 from omni.isaac.orbit.sensors import ContactSensorCfg, patterns
 from omni.isaac.orbit.utils import configclass
-from omni.viplanner.utils import VIPlannerMatterportRayCasterCameraCfg
+from orbit.reasoned_explorer.utils import ReasonedExplorerMatterportRayCasterCameraCfg
 
-from .base_cfg import ObservationsCfg, ViPlannerBaseCfg
+from .base_cfg import ObservationsCfg, ReasonedExplorerBaseCfg
 
 ##
 # Pre-defined configs
@@ -103,9 +103,9 @@ class TerrainSceneCfg(InteractiveSceneCfg):
     )
     sphere_4.init_state.pos = (8.0, -12, 2.0)
     # camera
-    depth_camera = VIPlannerMatterportRayCasterCameraCfg(
+    depth_camera = ReasonedExplorerMatterportRayCasterCameraCfg(
         prim_path="{ENV_REGEX_NS}/Robot/base",
-        offset=VIPlannerMatterportRayCasterCameraCfg.OffsetCfg(
+        offset=ReasonedExplorerMatterportRayCasterCameraCfg.OffsetCfg(
             pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)
         ),  # FIXME: currently in ROS convention
         pattern_cfg=patterns.PinholeCameraPatternCfg(
@@ -118,9 +118,9 @@ class TerrainSceneCfg(InteractiveSceneCfg):
         mesh_prim_paths=["${USER_PATH_TO_USD}/matterport.ply"],
         data_types=["distance_to_image_plane"],
     )
-    semantic_camera = VIPlannerMatterportRayCasterCameraCfg(
+    semantic_camera = ReasonedExplorerMatterportRayCasterCameraCfg(
         prim_path="{ENV_REGEX_NS}/Robot/base",
-        offset=VIPlannerMatterportRayCasterCameraCfg.OffsetCfg(
+        offset=ReasonedExplorerMatterportRayCasterCameraCfg.OffsetCfg(
             pos=(0.510, 0.0, 0.015), rot=(-0.5, 0.5, -0.5, 0.5)
         ),  # FIXME: currently in ROS convention
         pattern_cfg=patterns.PinholeCameraPatternCfg(
@@ -162,7 +162,7 @@ class MatterportObservationsCfg(ObservationsCfg):
 
 
 @configclass
-class ViPlannerMatterportCfg(ViPlannerBaseCfg):
+class ReasonedExplorerMatterportCfg(ReasonedExplorerBaseCfg):
     """Configuration for the locomotion velocity-tracking environment."""
 
     # Scene settings

@@ -6,7 +6,7 @@
 
 import os
 
-import omni.viplanner.viplanner.mdp as mdp
+import orbit.reasoned_explorer.reasoned_explorer.mdp as mdp
 from omni.isaac.orbit.envs import RLTaskEnvCfg
 from omni.isaac.orbit.managers import ObservationGroupCfg as ObsGroup
 from omni.isaac.orbit.managers import ObservationTermCfg as ObsTerm
@@ -162,7 +162,7 @@ class CommandsCfg:
 
 
 @configclass
-class ViPlannerBaseCfg(RLTaskEnvCfg):
+class ReasonedExplorerBaseCfg(RLTaskEnvCfg):
     """Configuration for the locomotion velocity-tracking environment."""
 
     # Basic settings

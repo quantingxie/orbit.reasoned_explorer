@@ -4,12 +4,12 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-from .carla_cfg import ViPlannerCarlaCfg
-from .matterport_cfg import ViPlannerMatterportCfg
-from .warehouse_cfg import ViPlannerWarehouseCfg
+from .carla_cfg import ReasonedExplorerCarlaCfg
+from .matterport_cfg import ReasonedExplorerMatterportCfg
+from .warehouse_cfg import ReasonedExplorerWarehouseCfg
 
 __all__ = [
-    "ViPlannerMatterportCfg",
-    "ViPlannerCarlaCfg",
-    "ViPlannerWarehouseCfg",
+    "ReasonedExplorerMatterportCfg",
+    "ReasonedExplorerCarlaCfg",
+    "ReasonedExplorerWarehouseCfg",
 ]
