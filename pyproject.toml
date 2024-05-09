@@ -7,8 +7,8 @@ build-backend = "setuptools.build_meta"
 # Project metadata
 [project]
 version = "0.1.0"
-name = "ext_template"  # TODO
-description = "Extension Template for Orbit"  # TODO
+name = "Reasoned Explorer"  # TODO
+description = "Path planning"  # TODO
 keywords = ["extension", "template", "orbit"]  # TODO
 readme = "README.md"
 requires-python = ">=3.10"

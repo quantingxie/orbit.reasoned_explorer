@@ -1,13 +1,3 @@
-# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
-# Author: Pascal Roth
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
-
-# Copyright (c) 2022, NVIDIA CORPORATION & AFFILIATES, ETH Zurich, and University of Toronto
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
 
 import os
 
@@ -39,8 +29,8 @@ class ReasonedExplorerAlgo:
         self.goal = goal
         self.type = type
         self.openai_api_key = openai_api_key        
-        self.rrt = RRT(model, goal, branches, rounds, openai_api_key)
-        self.graph_manager = GraphManager()
+        #self.rrt = RRT(model, goal, branches, rounds, openai_api_key)
+        #self.graph_manager = GraphManager()
 
         self.step_counter = 0
         self.iteration_count = 0
@@ -49,7 +39,6 @@ class ReasonedExplorerAlgo:
 
         # get transforms for images
         self.transform = transforms.Resize(self.train_config.img_input_size, antialias=None)
-
 
         # setup waypoint display in Isaac
         self.draw = _debug_draw.acquire_debug_draw_interface()
