@@ -1,14 +1,3 @@
-# Copyright (c) 2023-2024, ETH Zurich (Robotics Systems Lab)
-# Author: Pascal Roth
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
-
-# Copyright (c) 2022, NVIDIA CORPORATION & AFFILIATES, ETH Zurich, and University of Toronto
-# All rights reserved.
-#
-# SPDX-License-Identifier: BSD-3-Clause
-
 """
 This script demonstrates how to use the rigid objects class.
 """
@@ -84,9 +73,9 @@ def main():
     goals = torch.tensor(goal_pos.Get(), device=env.device).repeat(env.num_envs, 1)
 
     # initial paths
-    _, paths, fear = viplanner.plan_dual(
-        obs["planner_image"]["depth_measurement"], obs["planner_image"]["semantic_measurement"], goals
-    )
+    #_, paths, fear = viplanner.plan_dual(
+    #    obs["planner_image"]["depth_measurement"], obs["planner_image"]["semantic_measurement"], goals
+    #)
 
     # Simulate physics
     while simulation_app.is_running():
@@ -95,10 +84,11 @@ def main():
             env.sim.step(render=~args_cli.headless)
             continue
 
-        obs = env.step(action=paths.view(paths.shape[0], -1))[0]
+        #obs = env.step(action=paths.view(paths.shape[0], -1))[0]
 
         # apply planner
         goals = torch.tensor(goal_pos.Get(), device=env.device).repeat(env.num_envs, 1)
+        """
         if torch.any(
             torch.norm(obs["planner_transform"]["cam_position"] - goals)
             > viplanner.train_config.data_cfg[0].max_goal_distance
@@ -121,6 +111,7 @@ def main():
 
         # draw path
         #viplanner.debug_draw(paths, fear, goals)
+        """
 
 
 if __name__ == "__main__":
