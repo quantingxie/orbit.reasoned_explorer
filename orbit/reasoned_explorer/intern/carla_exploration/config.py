@@ -59,7 +59,7 @@ class CarlaExplorerConfig:
     )
     # ANYmal D wide_angle_camera: (1440, 1080)  <-> ANYmal C realsense (848, 480) <-> RealSense D455 (1280, 720)
     # ANYmal D wide_angle_camera: 1.93 <-> ANYmal C realsense: 1.93 <-> RealSense D455: 1.93
-    camera_intrinsics_sem: Optional[Tuple[float]] = None
+    camera_intrinsics_sem: Optional[Tuple[float]] = (423.54608, 0.0, 427.69815, 0.0, 423.54608, 240.17773, 0.0, 0.0, 1.0)
     # ANYmal D wide_angle_camera:   (575.60504, 0.0, 745.73121, 0.0, 578.56484, 519.52070, 0.0, 0.0, 1.0)
     # ANYmal C realsense:           (423.54608, 0.0, 427.69815, 0.0, 423.54608, 240.17773, 0.0, 0.0, 1.0)
     # RealSense D455:               (644.15496, 0.0, 639.53125, 0.0, 643.49212, 366.30880, 0.0, 0.0, 1.0)

@@ -62,6 +62,17 @@ class TerrainSceneCfg(InteractiveSceneCfg):
     robot.init_state.pos = (8.0, -0.5, 0.6)
     robot.init_state.rot = (0.5253, 0.0, 0.0, 0.8509)
 
+    # sensors
+    height_scanner = RayCasterCfg(
+        prim_path="{ENV_REGEX_NS}/Robot/base",
+        offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 0.5)),
+        attach_yaw_only=True,
+        pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
+        debug_vis=True,
+        mesh_prim_paths=["/World/GroundPlane"],
+    )
+    contact_forces = ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Robot/.*", history_length=3, debug_vis=False)
+
 
     # camera
     front_depth_camera = CameraCfg(

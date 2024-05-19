@@ -3,4 +3,5 @@
 logs/
 _orbit*
 .DS_Store
-model/.DS_Store
+usd/
+model/

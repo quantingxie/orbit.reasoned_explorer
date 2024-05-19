@@ -68,13 +68,34 @@ class ObservationsCfg:
 
     @configclass
     class PlannerImageCfg(ObsGroup):
-        depth_measurement = ObsTerm(
+        front_depth_measurement = ObsTerm(
             func=mdp.isaac_camera_data,
-            params={"sensor_cfg": SceneEntityCfg("depth_camera"), "data_type": "distance_to_image_plane"},
+            params={"sensor_cfg": SceneEntityCfg("front_depth_camera"), "data_type": "distance_to_image_plane"},
         )
-        semantic_measurement = ObsTerm(
+
+        left_depth_measurement = ObsTerm(
             func=mdp.isaac_camera_data,
-            params={"sensor_cfg": SceneEntityCfg("semantic_camera"), "data_type": "semantic_segmentation"},
+            params={"sensor_cfg": SceneEntityCfg("left_depth_camera"), "data_type": "distance_to_image_plane"},
+        )
+
+        right_depth_measurement = ObsTerm(
+            func=mdp.isaac_camera_data,
+            params={"sensor_cfg": SceneEntityCfg("right_depth_camera"), "data_type": "distance_to_image_plane"},
+        )
+
+        front_rgb_measurement = ObsTerm(
+            func=mdp.isaac_camera_data,
+            params={"sensor_cfg": SceneEntityCfg("front_depth_camera"), "data_type": "rgb"},
+        )
+
+        left_rgb_measurement = ObsTerm(
+            func=mdp.isaac_camera_data,
+            params={"sensor_cfg": SceneEntityCfg("left_depth_camera"), "data_type": "rgb"},
+        )
+
+        right_rgb_measurement = ObsTerm(
+            func=mdp.isaac_camera_data,
+            params={"sensor_cfg": SceneEntityCfg("right_depth_camera"), "data_type": "rgb"},
         )
 
         def __post_init__(self):
@@ -83,13 +104,33 @@ class ObservationsCfg:
 
     @configclass
     class PlannerTransformCfg(ObsGroup):
-        cam_position = ObsTerm(
+        front_cam_position = ObsTerm(
             func=mdp.cam_position,
-            params={"sensor_cfg": SceneEntityCfg("depth_camera")},
+            params={"sensor_cfg": SceneEntityCfg("front_depth_camera")},
         )
-        cam_orientation = ObsTerm(
+        front_cam_orientation = ObsTerm(
             func=mdp.cam_orientation,
-            params={"sensor_cfg": SceneEntityCfg("depth_camera")},
+            params={"sensor_cfg": SceneEntityCfg("front_depth_camera")},
+        )
+
+        left_cam_position = ObsTerm(
+            func=mdp.cam_position,
+            params={"sensor_cfg": SceneEntityCfg("left_depth_camera")},
+        )
+
+        left_cam_orientation = ObsTerm(
+            func=mdp.cam_orientation,
+            params={"sensor_cfg": SceneEntityCfg("left_depth_camera")},
+        )
+
+        right_cam_position = ObsTerm(
+            func=mdp.cam_position,
+            params={"sensor_cfg": SceneEntityCfg("right_depth_camera")},
+        )
+
+        right_cam_orientation = ObsTerm(
+            func=mdp.cam_orientation,
+            params={"sensor_cfg": SceneEntityCfg("right_depth_camera")},
         )
 
         def __post_init__(self):
